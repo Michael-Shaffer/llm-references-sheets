@@ -1,0 +1,46 @@
+:root {
+    --accent-primary: #D4A056;
+    --bg-primary: #171A21;
+    --bg-secondary: #232834;
+    --bg-tertiary: #303747;
+    --text-primary: #EAEBEE;
+    --text-secondary: #A0AEC0;
+    --border-primary: #333948;
+    --success-green: #18A999;
+    
+    --accent-primary-muted: color-mix(in srgb, var(--accent-primary) 15%, transparent);
+    --accent-primary-hover: color-mix(in srgb, var(--accent-primary) 85%, black);
+
+    --user-bubble-bg: var(--accent-primary);
+
+    --font-family-sans: Verdana, 'Segoe UI', Calibri, 'Helvetica Neue', Arial, sans-serif;
+    --font-family-serif: Georgia, 'Times New Roman', serif;
+
+    --code-block-bg: #1A1B26;
+    --code-inline-bg: #CCCCCC;
+    --code-text-color: #F8F8F2;
+
+    --chat-message-font-size: 1rem;
+    --chat-message-font-size-clamped: clamp(1rem, 0.5vw + 1rem, 1.25rem);
+    --chat-message-line-height: 1.6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-family-sans);
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.page-wrapper {
+    display: flex;
+    height: 100vh;
+}
+

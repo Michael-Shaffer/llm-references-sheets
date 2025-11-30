@@ -1,0 +1,124 @@
+.chat-interface {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    width: 0;
+}
+
+#chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 960px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    padding-bottom: 120px;
+    scrollbar-width: thin;
+    scrollbar-color: #555866 #2a2c37;
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    position: relative;
+    max-width: 100%;
+}
+
+.bot-message { align-self: flex-start; }
+
+.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.bot-message-content,
+.user-message-content {
+    font-family: var(--font-family-sans);
+    font-size: var(--chat-message-font-size-clamped);
+    font-weight: 300;
+    line-height: var(--chat-message-line-height);
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.bot-message-content {
+    padding: 0.8rem 1.3rem;
+    border-radius: 4px 18px 18px 18px;
+    color: var(--text-primary);
+    font-weight: 300;
+}
+
+.user-message-content {
+    background-color: var(--accent-primary);
+    color: #000;
+    font-weight: 400;
+    padding: 0.8rem 1.3rem;
+    border-radius: 18px 4px 18px 18px;
+}
+
+/* Welcome Screen */
+.welcome-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+.polaris-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 2rem;
+    color: var(--accent-primary);
+    filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.welcome-title.gradient-text {
+    background: linear-gradient(135deg, #60a5fa 0%, #c084fc 50%, #f472b6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 500;
+    animation: gradientShift 8s ease infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5)); }
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.7)); }
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+    #chat-messages {
+        padding: 1rem;
+        padding-bottom: 120px;
+    }
+}
+

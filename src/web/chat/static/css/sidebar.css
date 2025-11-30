@@ -1,0 +1,91 @@
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-primary);
+    flex-direction: column;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.sidebar-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.home-link {
+    align-self: center;
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-family-sans);
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.home-link:hover {
+    color: var(--accent-primary);
+}
+
+.sidebar-divider {
+    height: 1px;
+    background-color: var(--border-primary);
+    margin: 1.5rem 0;
+}
+
+.sidebar-subheading {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    padding: 0 0.5rem;
+    margin: 2rem 0 0;
+}
+
+.document-list {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.document-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+    cursor: pointer;
+}
+
+.document-item:hover {
+    background-color: var(--accent-primary-muted);
+    color: var(--text-primary);
+}
+
+.document-item.active {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.document-item svg {
+    flex-shrink: 0;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 900px) {
+    .sidebar {
+        display: none;
+    }
+}
+

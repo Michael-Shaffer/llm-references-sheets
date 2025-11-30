@@ -1,0 +1,116 @@
+/* --- Code Blocks --- */
+.bot-message pre {
+    background-color: var(--code-block-bg);
+    color: var(--code-text-color);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-top: 1rem;
+}
+
+.bot-message code:not(pre > code) {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.95em;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+/* --- Bot Message HTML Elements --- */
+.bot-message-content strong, .bot-message-content b { font-weight: 700; color: var(--text-primary); }
+.bot-message-content p { margin-bottom: 1em; }
+.bot-message-content p:last-child { margin-bottom: 0; }
+.bot-message-content ul, .bot-message-content ol { margin: 1em 0; padding-left: 1.5em; }
+.bot-message-content li { margin-bottom: 0.5em; line-height: var(--chat-message-line-height); }
+.bot-message-content h1, .bot-message-content h2, .bot-message-content h3 { margin-top: 1.5em; margin-bottom: 0.8em; font-weight: 600; color: var(--text-primary); }
+.bot-message-content blockquote { border-left: 4px solid var(--accent-primary); padding-left: 1em; margin: 1em 0; color: var(--text-secondary); font-style: italic; }
+.bot-message-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1em 0; }
+.bot-message-content a { color: var(--accent-primary); text-decoration: underline; }
+.bot-message-content a:hover { color: var(--accent-primary-hover); text-decoration: none; }
+
+/* --- Flagging --- */
+.message-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    align-self: flex-end;
+}
+
+.flag-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.flag-btn:hover, .flag-btn:focus {
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+    outline: none;
+}
+
+.flag-btn svg { width: 24px; height: 24px; }
+.flag-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+
+.flag-reason-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--border-primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px;
+    margin-top: 10px;
+}
+
+.flag-reason-container p { margin: 0; font-size: 0.95rem; color: var(--text-primary); }
+
+.flag-reason-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.flag-reason-input:focus { outline: none; border-color: var(--accent-primary); }
+.flag-reason-submit-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 24px;
+    background-color: var(--accent-primary);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-start;
+}
+.flag-reason-submit-btn:hover { background-color: var(--accent-primary-hover); transform: translateY(-1px); }
+.flag-reason-submit-btn:disabled { background-color: var(--border-primary); cursor: not-allowed; opacity: 0.8; transform: none; }
+
+/* --- Scrollbar --- */
+#chat-messages::-webkit-scrollbar { width: 8px; }
+#chat-messages::-webkit-scrollbar-track { background: #2a2c37; border-radius: 10px; }
+#chat-messages::-webkit-scrollbar-thumb { background-color: #555866; border-radius: 10px; border: 2px solid #2a2c37; }
+#chat-messages::-webkit-scrollbar-thumb:hover { background-color: #6a6e80; }
+
