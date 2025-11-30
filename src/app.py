@@ -25,22 +25,35 @@ def lib(filename):
 def chat_api():
     messages = request.json.get("messages", [])
     query = messages[-1].get("content")
+    print(f"[DEBUG] Received query: {query}")
+    print(f"[DEBUG] Sending to vLLM: {VLLM_CHAT_COMPLETIONS}")
 
     headers = {"Content-Type": "application/json"}
     data = {
-        "model": "/opt/models/Meta-Llama-3.1-8B-Instruct",
+        "model": "/models/Meta-Llama-3.1-8B-Instruct",
         "messages": messages,
         "stream": True
     }
 
     def generate_stream():
-        response = requests.post(
-            VLLM_CHAT_COMPLETIONS,
-            headers=headers,
-            json=data,
-            stream=True,
-            timeout=60
-        )
+        try:
+            response = requests.post(
+                VLLM_CHAT_COMPLETIONS,
+                headers=headers,
+                json=data,
+                stream=True,
+                timeout=(5, 60)  # (connect timeout, read timeout)
+            )
+            response.raise_for_status()
+        except requests.exceptions.ConnectionError:
+            yield f"data: {json.dumps({'content': '[Error: Cannot connect to vLLM at ' + VLLM_BASE + ']'})}\n\n"
+            return
+        except requests.exceptions.Timeout:
+            yield f"data: {json.dumps({'content': '[Error: vLLM request timed out]'})}\n\n"
+            return
+        except Exception as e:
+            yield f"data: {json.dumps({'content': f'[Error: {str(e)}]'})}\n\n"
+            return
 
         for line in response.iter_lines():
             if line:
@@ -51,12 +64,16 @@ def chat_api():
                 if decoded_line.strip() == "[DONE]":
                     break
 
-                chunk = json.loads(decoded_line)
-                if "choices" in chunk and len(chunk["choices"]) > 0:
-                    delta = chunk["choices"][0].get("delta", {})
-                    content = delta.get("content", "")
-                    if content:
-                        yield f"data: {json.dumps({'content': content})}\n\n"
+                try:
+                    chunk = json.loads(decoded_line)
+                    if "choices" in chunk and len(chunk["choices"]) > 0:
+                        delta = chunk["choices"][0].get("delta", {})
+                        content = delta.get("content", "")
+                        if content:
+                            yield f"data: {json.dumps({'content': content})}\n\n"
+                except json.JSONDecodeError:
+                    pass
+
     return Response(
         stream_with_context(generate_stream()),
         mimetype="text/event-stream",
@@ -68,3 +85,4 @@ def chat_api():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+
