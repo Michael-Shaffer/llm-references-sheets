@@ -11,8 +11,9 @@ from langchain.prompts import (
 
 # Configuration
 VLLM_API_BASE = "http://localhost:8000/v1"
-MODEL_NAME = "/models/Meta-Llama-3.1-8B-Instruct"
-MAX_TOKEN_LIMIT = 2000
+# Use the LoRA adapter name configured in the vLLM service
+MODEL_NAME = "stars-adapter"
+MAX_TOKEN_LIMIT = 2048
 
 class SessionManager:
     def __init__(self):
